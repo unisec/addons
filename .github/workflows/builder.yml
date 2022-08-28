@@ -1,0 +1,34 @@
+---
+name: "Build add-on"
+
+
+on: 
+  push:
+    branches:
+      - main
+      - develop
+jobs:
+  build:
+    name: Trabalho de Teste - Construindo add-on ${{ matrix.addon }} na arquitetura ${{ matrix.arch }}
+    runs-on: ubuntu-latest
+    strategy:
+
+      matrix:
+        addon: [ "platformio", "ssh" , "wireguard" ]
+        arch: ["aarch64", "amd64", "armhf", "armv7", "i386"]
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Teste Construção
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --${{ matrix.arch }} \
+            --target /data/${{ matrix.addon }} \
+            --docker-hub unicontrol \
+            --docker-user ${{ secrets.DOCKERHUB_USERNAME }} \
+            --docker-password ${{ secrets.DOCKERHUB_PASSWORD }} \
+            --image ${{ matrix.addon }}-${{ matrix.arch }} \
+            --addon \ 
+            --test
