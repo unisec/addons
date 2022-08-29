@@ -3,12 +3,14 @@ FROM ${BUILD_FROM}
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+
 RUN \
     apt-get update \
     && apt-get install -y --no-install-recommends \
+        && curl https://sh.rustup.rs -sSf | sh -s -- -y \
     && apt-get install python3-pip python3.10 libffi-dev libssl-dev build-essential python-dev -y  \
     && pip install --upgrade pip \
-    && pip3 install cryptography==37.0.4 --no-binary cryptography \
+    && pip3 install cryptography --no-use-pep517 \
     && pip3 install platformio esphome
 
 # Copy root filesystem
