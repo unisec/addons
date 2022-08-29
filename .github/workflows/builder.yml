@@ -33,6 +33,6 @@ jobs:
           args: |
             --${{ matrix.arch }} \
             --target /data/${{ matrix.addon }} \
-            --docker-hub addons \
+            --docker-hub ghcr.io/unisec \
             --image ${{ matrix.addon }}-${{ matrix.arch }} \
             --addon 
