@@ -8,7 +8,8 @@ RUN \
     && apt-get install -y --no-install-recommends \
     && apt-get install python3-pip python3.10 libffi-dev libssl-dev build-essential python-dev -y  \
     && pip install --upgrade pip \
-    && pip3 install cryptography==37.0.4 platformio esphome
+    && pip3 install cryptography==37.0.4 --no-binary cryptography \
+    && pip3 install platformio esphome
 
 # Copy root filesystem
 COPY rootfs /
