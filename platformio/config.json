@@ -6,7 +6,7 @@
   "url": "https://github.com/unisec/addons/tree/main/platformio",
   "startup": "application",
   "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
-  "image": "unicontrol/platformio-{arch}",
+  "image": "ghcr.io/unisec/platformio-{arch}",
   "init": false,
   "hassio_api": true,
   "usb": true,
