@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+
+# python3.10 espota3.py  -rh <Address> -rp <Port> -p <Password>  -f <Firmware>
+
+import argparse
+from esphome.espota2 import run_ota
+import sys
+
+def get_arguments() -> argparse.Namespace :
+    parser = argparse.ArgumentParser(description='Helper script to run esphome.espota2')
+    parser.add_argument("-rh","--remote-host", action="store", help="Remote Host",required=True)
+    parser.add_argument("-rp","--remote-port", action="store", help="Remote Port",required=True)
+    parser.add_argument("-p","--password", action="store", help="Password",required=True)
+    parser.add_argument("-f","--filename", action="store", help="Path to firmware",required=True)
+
+    arguments = parser.parse_args()
+
+    return arguments
+
+def main():    
+    args = get_arguments()
+    run_ota(
+        remote_host=args.remote_host, 
+        remote_port=int(args.remote_port), 
+        password=args.password, 
+        filename=args.filename
+    )
+    
+sys.exit(main())

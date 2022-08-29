@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Home Assistant Community Add-on: Platformio
+# Runs Platformio
+# ==============================================================================
+
+declare AGENTNAME
+
+AGENTNAME=$(bashio::config 'agentname')
+
+exec pio remote agent start --name ${AGENTNAME} --working-dir /workspace
+ 
