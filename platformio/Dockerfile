@@ -7,6 +7,7 @@ RUN \
     apt-get update \
     && apt-get install -y --no-install-recommends \
     && apt-get install python3-pip python3.10 libffi-dev libssl-dev build-essential python-dev -y  \
+    &&  pip install --upgrade pip \
     && pip3 install platformio esphome
 
 # Copy root filesystem
