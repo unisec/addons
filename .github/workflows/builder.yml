@@ -13,14 +13,20 @@ jobs:
     name: Trabalho Teste - Construindo Add-on ${{ matrix.addon }} na arquitetura ${{ matrix.arch }}
     runs-on: ubuntu-latest
     strategy:
-
       matrix:
         addon: [ "platformio", "ssh" , "wireguard" ]
         arch:  [ "aarch64", "amd64", "armhf", "armv7", "i386"]
 
     steps:
       - uses: actions/checkout@v3
-        
+
+      - name: Login no DockerHub
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
       - name: Construindo ${{ matrix.addon }} 
         uses: home-assistant/builder@master
         with:
@@ -29,5 +35,4 @@ jobs:
             --target /data/${{ matrix.addon }} \
             --docker-hub unicontrol \
             --image ${{ matrix.addon }}-${{ matrix.arch }} \
-            --addon \
-            --test 
+            --addon 

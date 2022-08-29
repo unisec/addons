@@ -1,4 +1,4 @@
-# Add-Ons Respository
+# Unicontrol Add-ons: The official repository
 
 Respositório oficial da UNISEC para gestão dos addons usados no unicontrol.
 
