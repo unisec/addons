@@ -4,18 +4,20 @@ FROM ${BUILD_FROM}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 
+# Copy root filesystem
+COPY rootfs /
+
+# Install packages
 RUN \
     apt-get update \
     && apt-get install -y --no-install-recommends \
     && apt-get install python3-pip python3.10 libffi-dev libssl-dev build-essential python-dev -y  \
     && pip install --upgrade pip \
-    && pip3 install platformio esphome
-
-# Copy root filesystem
-COPY rootfs /
+    && pip3 install platformio esphome \
+    # Set Permissions
+    && chmod +rwx /etc/cont-init.d/config.sh 
 
 # Environment Variables From PlatformIO
-
 ENV PLATFORMIO_WORKSPACE_DIR=/data/workspace
 
 ARG BUILD_ARCH
