@@ -26,13 +26,13 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Construindo ${{ matrix.addon }} 
         uses: home-assistant/builder@master
         with:
           args: |
             --${{ matrix.arch }} \
             --target /data/${{ matrix.addon }} \
-            --docker-hub unicontrol \
+            --docker-hub addons \
             --image ${{ matrix.addon }}-${{ matrix.arch }} \
             --addon 
