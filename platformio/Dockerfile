@@ -5,9 +5,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN \
     apt-get update \
-    && apt-get upgrade -y \ 
-    && apt-get install python3-pip python3.10 libffi-dev libssl-dev build-essential python-dev platformio -y  \
-    && pip3 install esphome
+    && apt-get install -y --no-install-recommends \
+    && apt-get install python3-pip python3.10 libffi-dev libssl-dev build-essential python-dev -y  \
+    && pip3 install platformio esphome
 
 # Copy root filesystem
 COPY rootfs /
