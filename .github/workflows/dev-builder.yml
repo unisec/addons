@@ -35,5 +35,5 @@ jobs:
             --target /data/${{ matrix.addon }} \
             --docker-hub ghcr.io/unisec \
             --image ${{ matrix.addon }}-${{ matrix.arch }} \
-            --addon 
+            --addon \
             --test
