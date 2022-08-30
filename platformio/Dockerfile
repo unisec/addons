@@ -16,7 +16,7 @@ RUN \
     && pip3 install platformio esphome \
     # Set Permissions
     && chmod +rwx /etc/cont-init.d/config.sh \
-    && chmod +rwx /etc/services.d/run
+    && chmod +rwx /etc/services.d/platformio/run
 
 # Environment Variables From PlatformIO
 ENV PLATFORMIO_WORKSPACE_DIR=/data/workspace
