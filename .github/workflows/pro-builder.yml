@@ -2,15 +2,12 @@
 name: "Construção add-on"
  
 on:
-  pull_request:
-    branches: ["main","develop"]
-
   push:
-    branches: ["main","develop"]
+    branches: ["main"]
 
 jobs:
   build:
-    name: Trabalho Teste - Construindo Add-on ${{ matrix.addon }} na arquitetura ${{ matrix.arch }}
+    name: Construindo Add-on ${{ matrix.addon }} na arquitetura ${{ matrix.arch }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,7 +24,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Construindo ${{ matrix.addon }} 
+      - name: Construindo add-on ${{ matrix.addon }} 
         uses: home-assistant/builder@master
         with:
           args: |
