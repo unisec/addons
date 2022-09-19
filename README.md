@@ -21,6 +21,7 @@ Como esse repoitório tem como foco conter e gerenciar os addons usados no unico
 - [WireGuard Client 🛡](wireguard/README.md) - Wireguard como cliente vpn para interconectividade
 - [Terminal & SSH](ssh/README.md) - Permitir o acessar remoto o Home Assistant usando SSH
 - [PlatformIO](platformio/README.md) - IDE para desenvolvimento de projetos embarcado
+- [Amazon S3 Backup](amazon-s3-backup/README.md) - Realiza o upload dos backups para a aws S3
 
 ## Contribuir
 
@@ -35,4 +36,4 @@ Para começar, acesse a documentação oficial para entender para começar os es
 
 ## Licença 📝
 
-MIT ©
+MIT ©  
