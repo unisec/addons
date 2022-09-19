@@ -7,7 +7,9 @@ COPY rootfs /
 
 # add aws-cli and deps
 RUN \
-    apt-get install \
+    apt-get update \
+    && apt-get install -y --no-install-recommends \
+    && apt-get install \
         python3.10 \
         python3-pip \
         groff \
