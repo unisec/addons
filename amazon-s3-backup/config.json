@@ -16,10 +16,10 @@
       "aws_access_key": "",
       "aws_secret_access_key": "",
       "bucket_name": "",
-      "bucket_region": "eu-central-1",
+      "bucket_region": "sa-east-1",
       "storage_class": "STANDARD",
       "delete_local_backups": true,
-      "local_backups_to_keep": 3
+      "local_backups_to_keep": 1
     },
     "schema": {
       "aws_access_key": "str",
