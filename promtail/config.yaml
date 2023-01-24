@@ -8,6 +8,7 @@ arch:
   - amd64
   - armv7
   - armhf
+  - i386
 description: Promtail for Home Assistant
 codenotary: codenotary@degatano.com
 init: false
