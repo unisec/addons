@@ -1,21 +1,71 @@
 ---
 name: "Construção add-on"
- 
+
 on:
   push:
     branches: ["main"]
 
 jobs:
-  build:
-    name: Construindo Add-on ${{ matrix.addon }} na arquitetura ${{ matrix.arch }}
+  init:
+    name: Preparando a construção
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        addon: [ "platformio", "ssh" , "wireguard","amazon-s3-backup","promtail"]
-        arch:  [ "aarch64", "amd64", "armhf", "armv7"]
-
+    outputs:
+      changed_files: ${{ steps.changed_files.outputs.all }}
+      changed_addons: ${{ steps.changed_addons.outputs.addons }}
+      changed: ${{ steps.changed_addons.outputs.changed }}
     steps:
       - uses: actions/checkout@v3
+
+      - name: Obtendo arquivos alterados
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
+      - name: Obtendo add-ons
+        id: addons
+        run: |
+          declare -a addons
+          for addon in $(find ./ -name config.yaml -o -name config.json | cut -d "/" -f2 | sort -u); do
+            addons+=("$addon");
+          done
+          echo "id=addons=${addons[@]}"
+          echo "addons=${addons[@]}" >> "$GITHUB_OUTPUT"
+
+      - name: Obtendo add-ons alterados
+        id: changed_addons
+        run: |
+          declare -a changed_addons
+          for addon in ${{ steps.addons.outputs.addons }}; do
+            if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon ]]; then
+              for file in "config.json" "rootfs" "config.yaml" "Dockerfile" "build.json" "build.yaml"; do
+                  if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon/$file ]]; then
+                    if [[ ! "${changed_addons[@]}" =~ $addon ]]; then
+                      changed_addons+=("\"${addon}\",");
+                    fi
+                  fi
+              done
+            fi
+          done
+          changed=$(echo ${changed_addons[@]} | rev | cut -c 2- | rev)
+          if [[ -n ${changed} ]]; then
+            echo "Changed add-ons: $changed";
+            echo "changed=true" >> "$GITHUB_OUTPUT";
+            echo "addons=[$changed]" >> "$GITHUB_OUTPUT";
+          else
+            echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})";
+          fi
+
+  build:
+    needs: init
+    runs-on: ubuntu-latest
+    if: needs.init.outputs.changed == 'true'
+    name: Build ${{ matrix.arch }} ${{ matrix.addon }} add-on
+    strategy:
+      matrix:
+        addon: ${{ fromJson(needs.init.outputs.changed_addons) }}
+        arch: ["aarch64", "amd64", "armhf", "armv7"]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
 
       - name: Login no DockerHub
         uses: docker/login-action@v2
@@ -24,7 +74,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Construindo add-on ${{ matrix.addon }} 
+      - name: Construindo ${{ matrix.addon }}
         uses: home-assistant/builder@master
         with:
           args: |
@@ -32,4 +82,4 @@ jobs:
             --target /data/${{ matrix.addon }} \
             --docker-hub ghcr.io/unisec \
             --image ${{ matrix.addon }}-${{ matrix.arch }} \
-            --addon 
+            --addon
