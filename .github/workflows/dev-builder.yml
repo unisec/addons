@@ -55,10 +55,6 @@ jobs:
               done
             fi
           done
-
-          echo "${{steps.changed_files.outputs.all}}"
-          echo "id=changed_addons=${changed_addons[@]}"
-
           changed=$(echo ${changed_addons[@]} | rev | cut -c 2- | rev)
           if [[ -n ${changed} ]]; then
             echo "Changed add-ons: $changed";
@@ -78,6 +74,15 @@ jobs:
         addon: ${{ fromJson(needs.init.outputs.changed_addons) }}
         arch: ["aarch64", "amd64", "armhf", "armv7"]
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Get information
+        id: info
+        uses: home-assistant/actions/helpers/info@master
+        with:
+          path: "./${{ matrix.addon }}"
+
       - name: Construindo ${{ matrix.addon }} 
         uses: home-assistant/builder@master
         with:
