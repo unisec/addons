@@ -9,8 +9,8 @@ arch:
   - armv7
   - armhf
 image: ghcr.io/unisec/promtail-{arch}
-description: Promtail for Home Assistant
-codenotary: codenotary@degatano.com
+description: Promtail for Home Assistant.
+codenotary: noc@unisec.com.br
 init: false
 journald: true
 map:
