@@ -9,19 +9,11 @@ on:
     branches: ["develop"]
 
 jobs:
-  build:
+  init:
     name: Trabalho Teste - Construindo Add-on ${{ matrix.addon }} na arquitetura ${{ matrix.arch }}
     runs-on: ubuntu-latest
     outputs:
-      changed_files: ${{ steps.changed_files.outputs.all }}
-      changed_addons: ${{ steps.changed_addons.outputs.addons }}
-      changed: ${{ steps.changed_addons.outputs.changed }}
-
-    strategy:
-      matrix:
-        #addon: [ "platformio", "ssh" , "wireguard","amazon-s3-backup","promtail"]
-        addon: ${{ fromJson(steps.addons.outputs.addons) }}
-        arch:  [ "aarch64", "amd64", "armhf", "armv7"]
+      addons: ${{ steps.addons.outputs.addons }}
     steps:
       - uses: actions/checkout@v3
 
@@ -46,6 +38,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+  build:
+    needs: init
+    runs-on: ubuntu-latest
+    name: Build ${{ matrix.arch }} ${{ matrix.addon }} add-on
+    strategy:
+      matrix:
+        addon: ${{ fromJson(needs.init.outputs.addons) }}
+        arch: ["aarch64", "amd64", "armhf", "armv7", "i386"]
+      
+    steps:
       - name: Construindo ${{ matrix.addon }} 
         uses: home-assistant/builder@master
         with:
