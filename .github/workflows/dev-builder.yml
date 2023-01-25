@@ -39,7 +39,7 @@ jobs:
           done
           echo "id=addons=${addons[@]}"
           echo "addons=${addons[@]}" >> "$GITHUB_OUTPUT"
-          
+
       - name: Get changed add-ons
         id: changed_addons
         run: |
