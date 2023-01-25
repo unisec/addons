@@ -55,7 +55,10 @@ jobs:
               done
             fi
           done
+
+          echo "${{steps.changed_files.outputs.all}}"
           echo "id=changed_addons=${changed_addons[@]}"
+
           changed=$(echo ${changed_addons[@]} | rev | cut -c 2- | rev)
           if [[ -n ${changed} ]]; then
             echo "Changed add-ons: $changed";
