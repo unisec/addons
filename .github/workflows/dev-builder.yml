@@ -10,7 +10,7 @@ on:
 
 jobs:
   init:
-    name: Trabalho Teste - Construindo Add-on ${{ matrix.addon }} na arquitetura ${{ matrix.arch }}
+    name: Preparando a construção
     runs-on: ubuntu-latest
     outputs:
       changed_files: ${{ steps.changed_files.outputs.all }}
@@ -19,11 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get changed files
+      - name: Obtendo arquivos alterados
         id: changed_files
         uses: jitterbit/get-changed-files@v1
 
-      - name: Get add-ons
+      - name: Obtendo add-ons
         id: addons
         run: |
           declare -a addons
@@ -33,7 +33,7 @@ jobs:
           echo "id=addons=${addons[@]}"
           echo "addons=${addons[@]}" >> "$GITHUB_OUTPUT"
 
-      - name: Get changed add-ons
+      - name: Obtendo add-ons alterados
         id: changed_addons
         run: |
           declare -a changed_addons
