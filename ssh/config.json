@@ -2,7 +2,7 @@
   "name": "Terminal & SSH",
   "version": "1.0.2",
   "slug": "ssh",
-  "description": "Allow logging in remotely to Home Assistant using SSH",
+  "description": "Allow logging in remotely to Home Assistant using SSH.",
   "url": "https://github.com/unisec/addons/tree/main/ssh",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "image": "ghcr.io/unisec/ssh-{arch}",
