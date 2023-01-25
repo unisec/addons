@@ -19,13 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Login no DockerHub
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Get changed files
         id: changed_files
         uses: jitterbit/get-changed-files@v1
@@ -77,11 +70,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Get information
-        id: info
-        uses: home-assistant/actions/helpers/info@master
+      - name: Login no DockerHub
+        uses: docker/login-action@v2
         with:
-          path: "./${{ matrix.addon }}"
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Construindo ${{ matrix.addon }} 
         uses: home-assistant/builder@master
