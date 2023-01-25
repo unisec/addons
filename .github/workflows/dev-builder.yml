@@ -19,9 +19,9 @@ jobs:
 
     strategy:
       matrix:
-        addon: [ "platformio", "ssh" , "wireguard","amazon-s3-backup","promtail"]
+        #addon: [ "platformio", "ssh" , "wireguard","amazon-s3-backup","promtail"]
+        addon: ${{ fromJson(steps.addons.outputs.addons) }}
         arch:  [ "aarch64", "amd64", "armhf", "armv7"]
-
     steps:
       - uses: actions/checkout@v3
 
@@ -39,32 +39,6 @@ jobs:
           echo "$addon"
           echo "addons=${addons[@]}" >> "$GITHUB_OUTPUT"
 
-      - name: Get changed add-ons
-        id: changed_addons
-        run: |
-          declare -a changed_addons
-          for addon in ${{ steps.addons.outputs.addons }}; do
-            if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon ]]; then
-              for file in ${{ env.MONITORED_FILES }}; do
-                  if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon/$file ]]; then
-                    if [[ ! "${changed_addons[@]}" =~ $addon ]]; then
-                      changed_addons+=("\"${addon}\",");
-                    fi
-                  fi
-              done
-            fi
-          done
-          
-          changed=$(echo ${changed_addons[@]} | rev | cut -c 2- | rev)
-          if [[ -n ${changed} ]]; then
-            echo "Changed add-ons: $changed";
-            echo "changed=true" >> "$GITHUB_OUTPUT";
-            echo "addons=[$changed]" >> "$GITHUB_OUTPUT";
-          else
-            echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})";
-          fi
-
-
       - name: Login no DockerHub
         uses: docker/login-action@v2
         with:
@@ -72,13 +46,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-#      - name: Construindo ${{ matrix.addon }} 
-#        uses: home-assistant/builder@master
-#        with:
-#          args: |
-#            --${{ matrix.arch }} \
-#            --target /data/${{ matrix.addon }} \
-#            --docker-hub ghcr.io/unisec \
-#            --image ${{ matrix.addon }}-${{ matrix.arch }} \
-#            --addon \
-#            --test
+      - name: Construindo ${{ matrix.addon }} 
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --${{ matrix.arch }} \
+            --target /data/${{ matrix.addon }} \
+            --docker-hub ghcr.io/unisec \
+            --image ${{ matrix.addon }}-${{ matrix.arch }} \
+            --addon \
+            --test
