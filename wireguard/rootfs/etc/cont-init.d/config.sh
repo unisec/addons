@@ -60,6 +60,7 @@ echo "[Interface]" > "${config}"
 
 
 api="api.unicontrol.me:8500"
+dns="1.1.1.1"
 
 if bashio::config.has_value 'api'; then
     api=$(bashio::config 'api')

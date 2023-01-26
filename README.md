@@ -22,6 +22,7 @@ Como esse repoitório tem como foco conter e gerenciar os addons usados no unico
 - [Terminal & SSH](ssh/README.md) - Permitir o acessar remoto o Home Assistant usando SSH
 - [PlatformIO](platformio/README.md) - IDE para desenvolvimento de projetos embarcado
 - [Amazon S3 Backup](amazon-s3-backup/README.md) - Realiza o upload dos backups para a aws S3
+- [Grafana Promtail](promtail/README.md) - Agent coletor de logs para o Grafana Loki
 
 ## Contribuir
 

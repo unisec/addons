@@ -1,6 +1,9 @@
 ---
 name: "Desenvolvimento - Construção add-on "
  
+env:
+  MONITORED_FILES: "apparmor.txt build.yaml config.yaml Dockerfile data rootfs build.json config.json"
+
 on:
   pull_request:
     branches: ["main"]
@@ -39,7 +42,7 @@ jobs:
           declare -a changed_addons
           for addon in ${{ steps.addons.outputs.addons }}; do
             if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon ]]; then
-              for file in "config.json" "rootfs" "config.yaml" "Dockerfile" "build.json" "build.yaml"; do
+              for file in  ${{ env.MONITORED_FILES }}; do
                   if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon/$file ]]; then
                     if [[ ! "${changed_addons[@]}" =~ $addon ]]; then
                       changed_addons+=("\"${addon}\",");
