@@ -23,7 +23,7 @@ if bashio::config.has_value "server.interface"; then
     interface=$(bashio::config "server.interface")
 fi
 # Run the WireGuard
-if wg-quick up  "${interface}"; then 
+if wg-quick up "${interface}"; then 
   exec echo "Success in active vpn"
 else 
   wg-quick down "${interface}"
