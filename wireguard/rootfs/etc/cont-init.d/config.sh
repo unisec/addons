@@ -60,7 +60,6 @@ echo "[Interface]" > "${config}"
 
 
 api="api.unicontrol.me:8500"
-dns="1.1.1.1"
 
 if bashio::config.has_value 'api'; then
     api=$(bashio::config 'api')
@@ -95,11 +94,11 @@ echo "Address = ${addresses}" >> "${config}"
 # Add all server DNS addresses to the configuration
 if bashio::config.has_value 'server.dns'; then
     for dns in $(bashio::config 'server.dns'); do
-        echo "DNS = ${dns}" >> "${config}"
+        echo "DNS = 1.1.1.1" >> "${config}"
     done
 else
     dns=$(bashio::dns.host)
-    echo "DNS = ${dns}" >> "${config}"
+    echo "DNS = 1.1.1.1" >> "${config}"
 fi
 
 # Get the server's private key
