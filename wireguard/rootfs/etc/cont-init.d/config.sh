@@ -94,11 +94,11 @@ echo "Address = ${addresses}" >> "${config}"
 # Add all server DNS addresses to the configuration
 if bashio::config.has_value 'server.dns'; then
     for dns in $(bashio::config 'server.dns'); do
-        echo "DNS = 1.1.1.1" >> "${config}"
+        #echo "DNS = 1.1.1.1" >> "${config}"
     done
 else
     dns=$(bashio::dns.host)
-    echo "DNS = 1.1.1.1" >> "${config}"
+    #echo "DNS = 1.1.1.1" >> "${config}"
 fi
 
 # Get the server's private key
