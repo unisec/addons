@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:13.2.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:13.2.0
 FROM ${BUILD_FROM}
 
 # Set shell
@@ -15,7 +15,7 @@ RUN \
         go \
         openresolv \
         libqrencode \
-        wireguard-tools \ 
+        wireguard-tools=1.0.20210914-r1 \ 
     \
     && git clone --branch "0.0.20230223" --depth=1 \
         "https://git.zx2c4.com/wireguard-go" /tmp/wireguard \
@@ -31,10 +31,6 @@ RUN \
 
 # Copy root filesystem
 COPY rootfs /
-
-# Set Permissions
-RUN \
-    chmod +x /etc/cont-init.d/config.sh
 
 # Build arguments
 ARG BUILD_ARCH
