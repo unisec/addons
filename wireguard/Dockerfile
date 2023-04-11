@@ -13,10 +13,13 @@ RUN \
     \
     && apk add --no-cache \
         go \
-        openresolv \
+        iptables \
         libqrencode \
+        openresolv \
         wireguard-tools=1.0.20210914-r1 \ 
     \
+    && ln -sf /sbin/xtables-nft-multi /sbin/ip6tables \
+    && ln -sf /sbin/xtables-nft-multi /sbin/iptables \
     && git clone --branch "0.0.20230223" --depth=1 \
         "https://git.zx2c4.com/wireguard-go" /tmp/wireguard \
     \
