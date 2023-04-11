@@ -15,7 +15,7 @@ RUN \
         go \
         openresolv \
         libqrencode \
-        wireguard-tools \ 
+        wireguard-tools=1.0.20210914-r1 \ 
     \
     && git clone --branch "0.0.20230223" --depth=1 \
         "https://git.zx2c4.com/wireguard-go" /tmp/wireguard \
