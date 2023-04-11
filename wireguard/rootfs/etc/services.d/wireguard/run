@@ -9,7 +9,7 @@ declare hostname
 declare address 
 declare token
 
-s6-svc -O run/service/wireguard
+s6-svc -O /run/service/wireguard
 
 bashio::log.info "Starting WireGuard..."
 
