@@ -32,6 +32,10 @@ RUN \
 # Copy root filesystem
 COPY rootfs /
 
+# Set Permissions
+RUN \
+    chmod +x /etc/cont-init.d/config.sh
+
 # Build arguments
 ARG BUILD_ARCH
 ARG BUILD_DATE
