@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:13.2.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.0.2
 FROM ${BUILD_FROM}
 
 # Set shell
@@ -16,7 +16,7 @@ RUN \
         iptables \
         libqrencode \
         openresolv \
-        wireguard-tools=1.0.20210914-r1 \ 
+        wireguard-tools=1.0.20210914-r3 \ 
     \
     && ln -sf /sbin/xtables-nft-multi /sbin/ip6tables \
     && ln -sf /sbin/xtables-nft-multi /sbin/iptables \
