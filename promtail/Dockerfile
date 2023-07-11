@@ -16,7 +16,7 @@ ARG YQ_VERSION=4.27.3
 RUN set -eux; \
     apt-get update; \
     apt-get install -qy --no-install-recommends \ 
-        tar=1.34+dfsg-1 \
+        tar \
         libsystemd-dev=247.3-7+deb11u1 \
         ; \
     update-ca-certificates; \
