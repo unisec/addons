@@ -9,7 +9,7 @@ arch:
   - armv7
   - armhf
 image: ghcr.io/unisec/promtail-{arch}
-description: Promtail for Home Assistant.
+description: Promtail for Home Assistant
 init: false
 journald: true
 map:
@@ -23,7 +23,7 @@ ports_description:
   9080/tcp: Promtail web server
 options:
   client:
-    url: https://siem.unisec.com.br/loki/api/v1/push
+    url: http://loki.wan.service.app.flexhome.casa/loki/api/v1/push
     tenant_id: admins
   log_level: info
 schema:
