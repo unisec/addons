@@ -5,9 +5,7 @@ env:
   MONITORED_FILES: "apparmor.txt build.yaml config.yaml Dockerfile data rootfs build.json config.json"
 
 on:
-  pull_request:
-    branches: ["main"]
-
+  pull_request: ~
   push:
     branches: ["develop"]
 
