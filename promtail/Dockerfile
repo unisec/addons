@@ -17,7 +17,7 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -qy --no-install-recommends \ 
         tar \
-        libsystemd-dev=247.3-7+deb11u1 \
+        libsystemd-dev \
         ; \
     update-ca-certificates; \
     \
