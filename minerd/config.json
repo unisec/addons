@@ -2,7 +2,7 @@
   "name": "Minerd",
   "version": "1.0.2",
   "slug": "minerd",
-  "description": "Cpuminer is a multi-threaded, highly optimized CPU miner for Litecoin, Bitcoin, and other cryptocurrencies.",
+  "description": "Cpuminer is a multi-threaded, highly optimized CPU miner for Litecoin, Bitcoin, and other cryptocurrencies",
   "url": "https://github.com/unisec/addons/tree/main/minerd",
   "startup": "application",
   "arch": ["amd64","i386"],
