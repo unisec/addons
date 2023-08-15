@@ -2,7 +2,7 @@
   "name": "WireGuard",
   "version": "1.1.1",
   "slug": "wireguard",
-  "description": "Fast, modern, secure VPN tunnel.",
+  "description": "Fast, modern, secure VPN tunnel",
   "url": "https://github.com/unisec/addons/tree/main/wireguard",
   "startup": "application",
   "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
