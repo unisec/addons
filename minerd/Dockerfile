@@ -17,7 +17,7 @@ RUN \
     && tar -xvf pooler-cpuminer-2.5.1-linux-x86_64.tar.gz \
     && install minerd /usr/bin/minerd \
     # Set Permissions
-    && chmod +rwx /usr/bin/minerd
+    && chmod a+x /usr/bin/minerd
 
 # Environment Variables From Pl
 ARG BUILD_ARCH
@@ -26,8 +26,6 @@ ARG BUILD_DESCRIPTION
 ARG BUILD_NAME
 ARG BUILD_REPOSITORY
 ARG BUILD_VERSION
-
-USER root
 
 LABEL \
     io.hass.name="Minerd" \
