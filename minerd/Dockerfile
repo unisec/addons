@@ -27,8 +27,6 @@ ARG BUILD_NAME
 ARG BUILD_REPOSITORY
 ARG BUILD_VERSION
 
-USER root
-
 LABEL \
     io.hass.name="Minerd" \
     io.hass.arch="${BUILD_ARCH}" \
