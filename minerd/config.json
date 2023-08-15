@@ -21,7 +21,7 @@
     "threads": 1
   },
   "schema": {
-    "agentname": "str",
+    "url": "str",
     "username": "str",
     "password": "str",
     "threads": "int"
