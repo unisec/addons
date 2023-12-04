@@ -1,0 +1,22 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Home Assistant Community Add-on: WireGuard
+# Shows current WireGuard status and handle reconnect
+# ==============================================================================
+
+sleep 60
+
+while [[ $tries -lt 3 ]]
+do
+    if ping -c 1 10.2.0.254
+    then
+        bashio::log.info ""Requesting current status from WireGuard. With reconnet""
+        exit 0
+    fi
+    tries=$((tries+1))
+done
+
+wg-quick down wg0;
+wg-quick up wg0;
+
+bashio::log.info ""Wireguard Restarted"";
