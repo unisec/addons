@@ -5,8 +5,9 @@
 # ==============================================================================
 
 declare tries=0
-
 sleep 60
+
+wg-quick up wg0;
 
 while [[ $tries -lt 3 ]]
 do
@@ -18,7 +19,7 @@ do
     tries=$((tries+1))
 done
 
-wg-quick down wg0;
-wg-quick up wg0;
+bashio::log.info ""Trying Connect Wireguard"";
 
-bashio::log.info ""Wireguard Restarted"";
+wg-quick down wg0; 
+wg-quick up wg0;
