@@ -4,6 +4,8 @@
 # Shows current WireGuard status and handle reconnect
 # ==============================================================================
 
+declare tries=0
+
 sleep 60
 
 while [[ $tries -lt 3 ]]
