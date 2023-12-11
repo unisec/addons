@@ -6,13 +6,11 @@
 
 declare tries=0
 sleep 60
-
+wg show;
 wg-quick up wg0;
-
 while [[ $tries -lt 3 ]]
 do
-    if ping -c 1 10.2.0.254
-    then
+    if ping -c 2 10.2.0.254; then
         bashio::log.info ""Requesting current status from WireGuard. With reconnet""
         exit 0
     fi
@@ -21,5 +19,5 @@ done
 
 bashio::log.info ""Trying Connect Wireguard"";
 
-wg-quick down wg0; 
+wg-quick down wg0;
 wg-quick up wg0;
