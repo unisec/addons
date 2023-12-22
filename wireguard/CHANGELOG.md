@@ -11,3 +11,8 @@
 ## 1.2.0
 
 - Melhorias na reconexão da vpn
+
+
+## 1.2.1
+
+- Não estava pingando
