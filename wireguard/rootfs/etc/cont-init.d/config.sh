@@ -351,11 +351,12 @@ if bashio::config.has_value 'peers'; then
 else 
     peer_public_key=$(echo ${wireguardjson} | jq -r ".peers[0].public_key")
     endpoint=$(echo ${wireguardjson} | jq -r '.peers[0].endpoint')
+    allowed_ips=$(echo ${wireguardjson} | jq -r ".peers[0].allowed_ips")
 
     {
         echo "[Peer]"
         echo "PublicKey = ${peer_public_key}"
-        echo "AllowedIPs = 10.2.0.0/24"
+        echo "AllowedIPs = ${allowed_ips}"
         #echo "PersistentKeepalive = 25"
         echo "Endpoint = ${endpoint}"
         echo ""
