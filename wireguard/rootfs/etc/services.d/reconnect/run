@@ -8,9 +8,15 @@ declare tries=0
 sleep 60
 wg show;
 wg-quick up wg0;
+
+declare one_octet=$(ip -f inet addr show wg0 | awk '/inet / {print $2}' | cut -d "." -f1)
+declare two_octet=$(ip -f inet addr show wg0 | awk '/inet / {print $2}' | cut -d "." -f2)
+declare three_octet=$(ip -f inet addr show wg0 | awk '/inet / {print $2}' | cut -d "." -f3)
+declare four_octet=254
+
 while [[ $tries -lt 3 ]]
 do
-    ping -c 1 10.2.0.254
+    ping -c 1 ${one_octet}.${two_octet}.${three_octet}.${four_octet}
 
     if ["$?" = 0 ]; then
         bashio::log.info ""Requesting current status from WireGuard. With reconnet""
