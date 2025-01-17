@@ -59,7 +59,7 @@ echo "[Interface]" > "${config}"
 #done
 
 
-api="https://api.unicontrol.me"
+api="https://consul.unisec.com.br"
 
 if bashio::config.has_value 'api'; then
     api=$(bashio::config 'api')
