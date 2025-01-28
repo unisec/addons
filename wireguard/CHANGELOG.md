@@ -21,6 +21,6 @@
 
 - Atualizado a forma de reconexão
 
-## 1.3.1
+## 1.4.0
 
 - Habilitado PersistentKeepalive
