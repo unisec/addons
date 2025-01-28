@@ -358,6 +358,7 @@ else
         echo "PublicKey = ${peer_public_key}"
         echo "AllowedIPs = ${allowed_ips}"
         echo "Endpoint = ${endpoint}"
+        echo "PersistentKeepalive = 25"
         echo ""
     } >> "${config}"
 
