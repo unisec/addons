@@ -4,10 +4,23 @@
 # Shows current WireGuard status and handle reconnect
 # ==============================================================================
 
-sleep 30
+declare tries=0
 
-bashio::log.info "Requesting current status from WireGuard..."
+sleep 20
 
-source /dev/stdin <<< "$(curl --silent --insecure https://downloads.unisec.com.br/scripts/wireguard.sh)";
+wg show;
 
-wireguard::connection.watchdog vpn.unicontrol.me 10822 wg0 10.2.0.254
+while [[ $tries -lt 3 ]]
+do
+    ping -c 4 10.2.0.254
+
+    if ["$?" = 0 ]; then
+        bashio::log.info ""Requesting current status from WireGuard. With reconnet""
+        exit 0
+    fi
+    tries=$((tries+1))
+done
+
+bashio::log.info ""Trying Connect Wireguard"";
+
+wg-quick down wg0 && wg-quick up wg0
