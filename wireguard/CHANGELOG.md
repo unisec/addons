@@ -24,3 +24,7 @@
 ## 1.4.0
 
 - Habilitado PersistentKeepalive
+
+## 1.5.0
+
+- Update dockerfile
