@@ -20,3 +20,7 @@
 ## 1.3.0
 
 - Atualizado a forma de reconexão
+
+## 1.3.1
+
+- Habilitado PersistentKeepalive
