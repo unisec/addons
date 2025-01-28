@@ -16,3 +16,7 @@
 ## 1.2.1
 
 - Não estava pingando
+
+## 1.3.0
+
+- Atualizado a forma de reconexão
