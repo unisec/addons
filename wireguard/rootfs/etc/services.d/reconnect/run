@@ -12,7 +12,7 @@ wg show;
 
 while [[ $tries -lt 3 ]]
 do
-    ping -c 4 10.2.0.254
+    ping 10.2.0.254
 
     if [[ $? = 0 ]]; then
         bashio::log.info ""Requesting current status from WireGuard. With reconnet""
