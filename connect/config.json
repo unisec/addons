@@ -1,0 +1,51 @@
+{
+  "name": "Connect",
+  "version": "1.0.0",
+  "slug": "connect",
+  "description": "Rápido, moderno e seguro",
+  "url": "https://github.com/unisec/addons/tree/main/connect",
+  "startup": "application",
+  "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
+  "image": "ghcr.io/unisec/connect-{arch}",
+  "init": false,
+  "ports": {
+    "51820/udp": 51820
+  },
+  "ports_description": {
+    "51820/udp": "WireGuard: forward this port in your router"
+  },
+  "boot": "auto",
+  "hassio_api": true,
+  "homeassistant_api": true,
+  "hassio_role": "manager",
+  "host_network": true,
+  "privileged": ["NET_ADMIN"],
+  "devices": ["/dev/net/tun"],
+  "map": ["ssl:rw"],
+  "options": {
+    "interface": {
+      "ifname": "connect",
+      "private_key": "",
+      "listen_port": 51871,
+      "address": ""
+    },
+    "peer": {
+        "public_key": "",
+        "allowed_ips": "",
+        "endpoint": ""
+    }
+  },
+  "schema": {
+    "interface": {
+      "ifname": "str",
+      "private_key": "str",
+      "listen_port": "int",
+      "address": "str"
+    },
+    "peers": {
+        "public_key": "str",
+        "allowed_ips": "str",
+        "endpoint": "str"
+    }
+  }
+}

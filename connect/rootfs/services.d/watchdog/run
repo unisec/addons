@@ -1,0 +1,99 @@
+#!/command/with-contenv bashio
+
+# ==============================================================================
+# Unicontrol Add-on: Connect
+# ==============================================================================
+
+function wireguard::connection.check(){
+    local ADDRESS=${1}
+    local PORT=${2}
+    
+    if ! nc -u -z ${ADDRESS} ${PORT}; then
+        return 1
+    fi
+
+    return 0
+}
+
+function wireguard::connection.ip(){
+    local DOMAIN=${1}
+    local ADDRESS=$(host -4 -W 1 -t A ${DOMAIN} | awk '/has address/ { print $NF; exit }')
+    
+    echo ${ADDRESS}
+    
+    return 0
+}
+
+function wireguard::connection.keepalive(){
+    local ADDRESS=${1}
+    
+    ping -c 1 ${ADDRESS} > /dev/null
+    
+    return $?
+}
+
+function wireguard::peer.interface_exists(){
+    local INTERFACE=${1}
+    ip l show ${INTERFACE} > /dev/null
+
+    if [ $? -eq 1 ]; then
+        return 1
+    fi
+
+    return 0
+}
+
+function wireguard::connection.watchdog(){
+
+    local TRIES=0
+    local ENDPOINT=${1}
+    local PORT=${2}
+    local INTERFACE=${3}
+    local TARGET=${4}
+    local DIRECTORY="/tmp/wireguard"
+
+    mkdir -p ${DIRECTORY}
+
+    wireguard::connection.ip ${ENDPOINT} > ${DIRECTORY}/new-ip.txt
+
+    while [ ${TRIES} -lt 3 ]
+    do
+        local COUNT_ERRORS=0
+        
+        if ! wireguard::connection.keepalive ${TARGET}; then
+            COUNT_ERRORS=$((COUNT_ERRORS+1))
+            bashio::log.warning "Connection to ${TARGET} failed"
+        fi
+        
+        if [ -f ${DIRECTORY}/current-ip.txt ] && ! (diff ${DIRECTORY}/current-ip.txt ${DIRECTORY}/new-ip.txt > /dev/null); then
+            COUNT_ERRORS=$((COUNT_ERRORS+1))
+            bashio::log.warning "IP address changed"
+        fi
+
+        if ! wireguard::connection.check ${ENDPOINT} ${PORT}; then
+            COUNT_ERRORS=$((COUNT_ERRORS+1))
+            bashio::log.warning "Connection to ${ENDPOINT}:${PORT} failed"
+        fi
+        
+        if [ ${COUNT_ERRORS} = 0 ]; then
+            bashio::log.warning "done 😎" > /var/log/wireguard.log
+        fi
+
+        TRIES=$((TRIES+1))
+    done
+    
+    if wireguard::peer.interface_exists; then
+        wg-quick down ${INTERFACE} > /dev/null;
+        wg-quick up   ${INTERFACE} > /dev/null;
+        wireguard::connection.ip ${ENDPOINT} > ${DIRECTORY}/current-ip.txt
+    else
+        wg-quick up   ${INTERFACE} > /dev/null;
+        wireguard::connection.ip ${ENDPOINT} > ${DIRECTORY}/current-ip.txt
+    fi
+}
+
+declare interface_ifname=$(bashio::config "interface.ifname")
+declare peer_endpoint$(bashio::config "peer.allowed_ips")
+declare peer_endpoint_port=$(echo ${peer_endpoint} | cut -d ":" -f2)
+
+exec wireguard::connection.watchdog ${peer_endpoint} ${peer_endpoint_port} ${interface_ifname} 10.2.0.254

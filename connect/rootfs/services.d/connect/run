@@ -1,0 +1,28 @@
+#!/command/with-contenv bashio
+
+# ==============================================================================
+# Unicontrol Add-on: Connect
+# ==============================================================================
+
+declare interface
+declare api
+declare hostname
+declare address 
+declare token
+
+s6-svc -O /run/service/wireguard
+
+bashio::log.info "Starting service connect..."
+
+export WG_I_PREFER_BUGGY_USERSPACE_TO_POLISHED_KMOD=1
+
+interface=$(bashio::config "interface.ifname")
+
+if wg-quick up "${interface}"; then 
+  exec bashio::log.info "Success in starting connect"
+else 
+  wg-quick down "${interface}";
+  wg-quick up   "${interface}";
+
+  exec bashio::log.info "Success in restarting connect"
+fi 
