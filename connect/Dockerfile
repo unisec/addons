@@ -21,12 +21,6 @@ RUN \
     \
     && ln -sf /sbin/xtables-nft-multi /sbin/ip6tables \
     && ln -sf /sbin/xtables-nft-multi /sbin/iptables \
-    && git clone --branch "master" --depth=1 \
-        "https://git.zx2c4.com/wireguard-go" /tmp/wireguard \
-    \
-    && cd /tmp/wireguard \
-    && make \
-    && make install \
     \
     && rm -f -r /tmp/* \
     && apk del --no-cache --purge \
