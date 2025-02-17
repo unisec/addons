@@ -13,11 +13,11 @@ RUN \
         git \
     \
     && apk add --no-cache \
-        go=1.23.6-r0 \
-        iptables=1.8.11-r1 \
-        libqrencode-tools=4.1.1-r2 \
-        openresolv=3.13.2-r1 \
-        wireguard-tools=1.0.20210914-r4 \
+        go \
+        iptables \
+        libqrencode-tools \
+        openresolv \
+        wireguard-tools \
     \
     && ln -sf /sbin/xtables-nft-multi /sbin/ip6tables \
     && ln -sf /sbin/xtables-nft-multi /sbin/iptables \
