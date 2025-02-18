@@ -79,7 +79,7 @@ function wireguard::connection.watchdog(){
         fi
         
         if [ ${COUNT_ERRORS} = 0 ]; then
-            bashio::log.warning "Watchdog 🐕 - Stable connection"
+            bashio::log.info "Watchdog 🐕 - Stable connection"
             exit ${EXIT_SUCCESS}
         fi
 
