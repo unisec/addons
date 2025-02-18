@@ -10,7 +10,7 @@ declare hostname
 declare address 
 declare token
 
-s6-svc -O /run/service/wireguard
+s6-svc -O /run/service/connect
 
 bashio::log.info "Starting service connect..."
 
