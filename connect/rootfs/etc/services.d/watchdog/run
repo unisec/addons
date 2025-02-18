@@ -4,6 +4,9 @@
 # Unicontrol Add-on: Connect
 # ==============================================================================
 
+declare EXIT_SUCCESS=0
+declare EXIT_FAILURE=1
+
 function wireguard::connection.check(){
     local ADDRESS=${1}
     local PORT=${2}
@@ -76,7 +79,8 @@ function wireguard::connection.watchdog(){
         fi
         
         if [ ${COUNT_ERRORS} = 0 ]; then
-            bashio::log.warning "done 😎" > /var/log/wireguard.log
+            bashio::log.warning "Watchdog 🐕 - Stable connection"
+            exit ${EXIT_SUCCESS}
         fi
 
         TRIES=$((TRIES+1))
