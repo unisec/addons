@@ -65,17 +65,17 @@ function wireguard::connection.watchdog(){
         
         if ! wireguard::connection.keepalive ${TARGET}; then
             COUNT_ERRORS=$((COUNT_ERRORS+1))
-            bashio::log.warning "Connection to ${TARGET} failed"
+            bashio::log.warning "Watchdog 🐕 - Connection to ${TARGET} failed"
         fi
         
         if [ -f ${DIRECTORY}/current-ip.txt ] && ! (diff ${DIRECTORY}/current-ip.txt ${DIRECTORY}/new-ip.txt > /dev/null); then
             COUNT_ERRORS=$((COUNT_ERRORS+1))
-            bashio::log.warning "IP address changed"
+            bashio::log.warning "Watchdog 🐕 - IP address changed"
         fi
 
         if ! wireguard::connection.check ${ENDPOINT} ${PORT}; then
             COUNT_ERRORS=$((COUNT_ERRORS+1))
-            bashio::log.warning "Connection to ${ENDPOINT}:${PORT} failed"
+            bashio::log.warning "Watchdog 🐕 - Connection to ${ENDPOINT}:${PORT} failed"
         fi
         
         if [ ${COUNT_ERRORS} = 0 ]; then
