@@ -12,10 +12,10 @@ function wireguard::connection.check(){
     local PORT=${2}
     
     if ! nc -u -z ${ADDRESS} ${PORT}; then
-        return 1
+        return ${EXIT_FAILURE}
     fi
 
-    return 0
+    return ${EXIT_SUCCESS}
 }
 
 function wireguard::connection.ip(){
@@ -24,7 +24,7 @@ function wireguard::connection.ip(){
     
     echo ${ADDRESS}
     
-    return 0
+    return ${EXIT_SUCCESS}
 }
 
 function wireguard::connection.keepalive(){
@@ -40,10 +40,10 @@ function wireguard::peer.interface_exists(){
     ip l show ${INTERFACE} > /dev/null
 
     if [ $? -eq 1 ]; then
-        return 1
+        return ${EXIT_FAILURE}
     fi
 
-    return 0
+    return ${EXIT_SUCCESS}
 }
 
 function wireguard::connection.watchdog(){
