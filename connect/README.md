@@ -6,12 +6,12 @@ Esse addon será reponsável por conectar o home assistant a infraestrutura da u
 
 ```yaml
 interface:
-  ifname: ""
+  ifname: "connect"
   private_key: ""
   listen_port: 51871
   address: ""
-peers:
-    public_key: ""
-    allowed_ips: ""
-    endpoint: ""
+peer:
+  public_key: ""
+  allowed_ips: ""
+  endpoint: ""
 ```
