@@ -96,4 +96,4 @@ declare interface_ifname=$(bashio::config "interface.ifname")
 declare peer_endpoint=$(bashio::config "peer.allowed_ips")
 declare peer_endpoint_port=$(echo ${peer_endpoint} | cut -d ":" -f2)
 
-exec wireguard::connection.watchdog ${peer_endpoint} ${peer_endpoint_port} ${interface_ifname} 10.2.0.254
+wireguard::connection.watchdog ${peer_endpoint} ${peer_endpoint_port} ${interface_ifname} 10.2.0.254
