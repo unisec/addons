@@ -82,7 +82,7 @@ function wireguard::connection.watchdog(){
         TRIES=$((TRIES+1))
     done
     
-    if wireguard::peer.interface_exists; then
+    if wireguard::peer.interface_exists ${INTERFACE}; then
         wg-quick down ${INTERFACE} > /dev/null;
         wg-quick up   ${INTERFACE} > /dev/null;
         wireguard::connection.ip ${ENDPOINT} > ${DIRECTORY}/current-ip.txt
