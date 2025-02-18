@@ -1,0 +1,9 @@
+#!/command/with-contenv bashio
+
+# ==============================================================================
+# Unicontrol Add-on: Connect
+# ==============================================================================
+
+declare interface_ifname=$(bashio::config "interface.ifname")
+
+wg-quick down ${INTERFACE}
