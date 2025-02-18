@@ -43,7 +43,7 @@ ARG BUILD_VERSION
 # Labels
 LABEL \
     io.hass.name="Connect" \
-    io.hass.description="Fast, modern, secure VPN tunnel" \
+    io.hass.description="Fast, modern, secure VPN tunnel." \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
