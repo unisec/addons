@@ -3,12 +3,3 @@
   "url": "https://github.com/unisec/addons",
   "maintainer": "Unisec LTDA <contato@unisec.com.br>"
 }
-interface:
-  ifname: connect
-  private_key: eMLXHJJ/i7SDQVpRWh+ahrIrXnUXMto+CwLuc6NhfG0=
-  listen_port: 51871
-  address: 10.2.0.178/24
-peer:
-  public_key: zrvjdPXxteVHNx1xOUn78JHKTwc3qx1sH0zLlhooC3M=
-  allowed_ips: 10.0.0.254/24
-  endpoint: vpn.unisec.com.br:10822
