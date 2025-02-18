@@ -30,9 +30,9 @@
       "address": ""
     },
     "peer": {
-        "public_key": "",
-        "allowed_ips": "",
-        "endpoint": ""
+      "public_key": "",
+      "allowed_ips": "",
+      "endpoint": ""
     }
   },
   "schema": {
@@ -43,9 +43,9 @@
       "address": "str"
     },
     "peer": {
-        "public_key": "str",
-        "allowed_ips": "str",
-        "endpoint": "str"
+      "public_key": "str",
+      "allowed_ips": "str",
+      "endpoint": "str"
     }
   }
 }
