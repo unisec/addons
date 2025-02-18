@@ -6,4 +6,4 @@
 
 declare interface_ifname=$(bashio::config "interface.ifname")
 
-wg-quick down ${INTERFACE}
+wg-quick down ${interface_ifname}
