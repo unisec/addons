@@ -14,7 +14,7 @@ declare post_down="iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %
 
 declare peer_public_key=$(bashio::config "peer.public_key")
 declare peer_allowed_ips=$(bashio::config "peer.allowed_ips")
-declare peer_endpoint$(bashio::config "peer.allowed_ips")
+declare peer_endpoint=$(bashio::config "peer.allowed_ips")
 
 bashio::log.info "Generating connect configuration..."
 
