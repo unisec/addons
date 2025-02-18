@@ -35,6 +35,6 @@ bashio::log.info "Generating connect configuration..."
     echo ""
 } >> "/etc/wireguard/${interface_ifname}.conf"
 
-bashio::log.warning < "/etc/wireguard/${interface_ifname}.conf"
+cat "/etc/wireguard/${interface_ifname}.conf"
 
 bashio::log.info "Done configuration generation!"
