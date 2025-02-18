@@ -18,6 +18,7 @@ RUN \
         libqrencode-tools \
         openresolv \
         wireguard-tools \
+        bind-tools \
     \
     && ln -sf /sbin/xtables-nft-multi /sbin/ip6tables \
     && ln -sf /sbin/xtables-nft-multi /sbin/iptables \
