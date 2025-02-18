@@ -9,10 +9,10 @@
   "image": "ghcr.io/unisec/connect-{arch}",
   "init": false,
   "ports": {
-    "51820/udp": 51820
+    "51871/udp": 51871
   },
   "ports_description": {
-    "51820/udp": "WireGuard: forward this port in your router"
+    "51871/udp": "WireGuard: forward this port in your router"
   },
   "boot": "auto",
   "hassio_api": true,
