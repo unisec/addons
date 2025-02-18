@@ -42,7 +42,7 @@
       "listen_port": "int",
       "address": "str"
     },
-    "peers": {
+    "peer": {
         "public_key": "str",
         "allowed_ips": "str",
         "endpoint": "str"
